@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import NavBar from './components/Navbar';
+import AppointmentsList from './components/AppointmentList';
+import AppointmentForm from './components/AppointmentForm';
+import PatientsList from './components/PatientsList';
+import DoctorsList from './components/DoctorsList';
 
-function App() {
+export default function App() {
+  const [view, setView] = useState('appointments');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <NavBar setView={setView} />
+
+      {view === 'appointments' && (
+        <>
+          <AppointmentForm />
+          <AppointmentsList />
+        </>
+      )}
+
+      {view === 'patients' && <PatientsList />}
+      {view === 'doctors' && <DoctorsList />}
     </div>
   );
 }
-
-export default App;
